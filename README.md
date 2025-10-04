@@ -149,3 +149,18 @@ The SQLite database contains a `questions` table with:
 - Total correct/incorrect count
 - Question-by-question breakdown
 - Correct answer reveals for missed questions
+
+## Deployment
+
+This application is configured for deployment on **Vercel**. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for detailed deployment instructions.
+
+### Quick Deploy to Vercel
+
+1. Install Vercel CLI: `npm install -g vercel`
+2. Run: `vercel`
+3. Follow the prompts to deploy
+
+The application includes:
+- Vercel serverless functions in the `api/` directory
+- Automatic React build configuration
+- CORS handling for API endpoints
