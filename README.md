@@ -1,4 +1,4 @@
-# Online Quiz Application - Programming Edition
+# Online Quiz Application 
 
 A full-stack programming quiz application built with React (frontend) and Node.js/Express (backend) with SQLite database.
 
