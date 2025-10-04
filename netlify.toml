@@ -1,7 +1,7 @@
 # Netlify configuration for React app
 [build]
   base = "client"
-  publish = "client/build"
+  publish = "build"
   command = "npm run build"
 
 # Functions directory
