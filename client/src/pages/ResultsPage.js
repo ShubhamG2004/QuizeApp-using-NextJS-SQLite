@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 const ResultsPage = () => {
   const location = useLocation();
-  const { results, totalQuestions, answeredQuestions } = location.state || {};
+  const { results, answeredQuestions } = location.state || {};
 
   // If no results data, redirect to start
   if (!results) {
