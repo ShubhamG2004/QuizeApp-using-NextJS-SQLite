@@ -150,17 +150,11 @@ The SQLite database contains a `questions` table with:
 - Question-by-question breakdown
 - Correct answer reveals for missed questions
 
-## Deployment
+<img width="1366" height="2637" alt="QuizApp" src="https://github.com/user-attachments/assets/3fdd324d-38fa-46d0-a0b2-42c91b3c824e" />
 
-This application is configured for deployment on **Vercel**. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for detailed deployment instructions.
+<img width="1366" height="709" alt="Quiz2" src="https://github.com/user-attachments/assets/e92ba84d-6ac5-4390-b4e0-2f54006327c3" />
 
-### Quick Deploy to Vercel
+<img width="1366" height="6040" alt="Result_quiz" src="https://github.com/user-attachments/assets/48237b78-8f5b-4557-b9ce-5f6994eb5622" />
 
-1. Install Vercel CLI: `npm install -g vercel`
-2. Run: `vercel`
-3. Follow the prompts to deploy
 
-The application includes:
-- Vercel serverless functions in the `api/` directory
-- Automatic React build configuration
-- CORS handling for API endpoints
+
