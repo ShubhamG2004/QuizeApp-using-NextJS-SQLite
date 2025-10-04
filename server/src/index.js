@@ -12,10 +12,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
+
 app.use('/api/quiz', quizRoutes);
 
-// Health check endpoint
+
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Quiz App Server is running!', timestamp: new Date().toISOString() });
 });
