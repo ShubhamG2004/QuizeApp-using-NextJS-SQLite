@@ -6,7 +6,7 @@
 
 # Functions directory
 [functions]
-  directory = "netlify/functions"
+  directory = "../netlify/functions"
 
 # Redirect API calls to Netlify functions
 [[redirects]]
