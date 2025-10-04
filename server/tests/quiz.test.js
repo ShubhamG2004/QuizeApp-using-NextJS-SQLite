@@ -37,11 +37,11 @@ describe('Quiz API Endpoints', () => {
       
       // Create answers array with all correct answers (for testing, we know the correct answers)
       const correctAnswers = [
-        { questionId: 1, selectedOption: 'C' }, // Paris
-        { questionId: 2, selectedOption: 'B' }, // JavaScript
-        { questionId: 3, selectedOption: 'B' }, // 4
-        { questionId: 4, selectedOption: 'B' }, // Mars
-        { questionId: 5, selectedOption: 'C' }, // Blue Whale
+        { questionId: 1, selectedOption: 'B' }, // JavaScript
+        { questionId: 2, selectedOption: 'A' }, // HTTP
+        { questionId: 3, selectedOption: 'C' }, // JavaScript data types
+        { questionId: 4, selectedOption: 'A' }, // SQL
+        { questionId: 5, selectedOption: 'C' }, // Django
       ];
 
       const response = await request(app)
@@ -80,9 +80,9 @@ describe('Quiz API Endpoints', () => {
 
     it('should handle mixed correct and incorrect answers', async () => {
       const mixedAnswers = [
-        { questionId: 1, selectedOption: 'C' }, // Correct - Paris
-        { questionId: 2, selectedOption: 'A' }, // Wrong - Should be JavaScript
-        { questionId: 3, selectedOption: 'B' }, // Correct - 4
+        { questionId: 1, selectedOption: 'B' }, // Correct - JavaScript
+        { questionId: 2, selectedOption: 'B' }, // Wrong - Should be HyperText Transfer Protocol
+        { questionId: 3, selectedOption: 'C' }, // Correct - Float is not a JS data type
       ];
 
       const response = await request(app)
@@ -113,7 +113,7 @@ describe('Quiz API Endpoints', () => {
 
     it('should handle missing answers for some questions', async () => {
       const partialAnswers = [
-        { questionId: 1, selectedOption: 'C' }, // Only answer first question
+        { questionId: 1, selectedOption: 'B' }, // Only answer first question - JavaScript (correct)
       ];
 
       const response = await request(app)

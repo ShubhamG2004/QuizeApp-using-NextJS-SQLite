@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App - Compact UI Demo</title>
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+          /* Color System */
+          --primary: #6366f1;
+          --primary-light: #818cf8;
+          --primary-dark: #4f46e5;
+          --secondary: #ec4899;
+          --success: #10b981;
+          --warning: #f59e0b;
+          --danger: #ef4444;
+          --gray-50: #f9fafb;
+          --gray-100: #f3f4f6;
+          --gray-200: #e5e7eb;
+          --gray-300: #d1d5db;
+          --gray-500: #6b7280;
+          --gray-700: #374151;
+          --gray-900: #111827;
+          
+          /* Background System */
+          --bg-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+          --bg-surface: #ffffff;
+          --bg-card: #ffffff;
+          --bg-glass: rgba(255, 255, 255, 0.9);
+          --bg-glass-dark: rgba(255, 255, 255, 0.15);
+          
+          /* Compact Shadows */
+          --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+          --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+          --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+          --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+          --shadow-glow: 0 0 0 1px rgb(99 102 241 / 0.05), 0 1px 2px 0 rgb(99 102 241 / 0.15);
+          
+          /* Typography */
+          --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          
+          /* Compact spacing */
+          --space-xs: 0.25rem;
+          --space-sm: 0.5rem;
+          --space-md: 1rem;
+          --space-lg: 1.5rem;
+          --space-xl: 2rem;
+          
+          /* Border radius */
+          --radius-sm: 6px;
+          --radius-md: 8px;
+          --radius-lg: 12px;
+          
+          /* Transitions */
+          --transition-fast: all 0.15s ease;
+          --transition-smooth: all 0.2s ease;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          font-family: var(--font-primary);
+          font-size: 14px;
+          line-height: 1.5;
+          background: var(--bg-primary);
+          background-attachment: fixed;
+          min-height: 100vh;
+          color: var(--gray-900);
+        }
+
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 0 16px;
+        }
+
+        /* Header */
+        .header {
+          background: var(--bg-glass-dark);
+          backdrop-filter: blur(20px);
+          padding: 12px 0;
+          margin-bottom: 20px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          text-align: center;
+        }
+
+        .header h1 {
+          color: white;
+          font-size: 1.5rem;
+          font-weight: 600;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cards */
+        .card {
+          background: var(--bg-card);
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: var(--shadow-sm);
+          margin-bottom: 16px;
+          border: 1px solid var(--gray-200);
+          transition: all 0.2s ease;
+        }
+
+        .card:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+        }
+
+        /* Buttons */
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 8px;
+          font-family: var(--font-primary);
+          font-size: 14px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          text-decoration: none;
+          min-width: auto;
+          box-shadow: var(--shadow-sm);
+          white-space: nowrap;
+        }
+
+        .btn:hover {
+          transform: translateY(-1px);
+        }
+
+        .btn-primary {
+          background: var(--primary);
+          color: white;
+        }
+
+        .btn-primary:hover {
+          background: var(--primary-light);
+          box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+          background: var(--gray-100);
+          color: var(--gray-700);
+          border: 1px solid var(--gray-300);
+        }
+
+        /* Quiz Components */
+        .quiz-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+          padding: 16px 20px;
+          background: var(--bg-glass);
+          border-radius: 12px;
+          box-shadow: var(--shadow-sm);
+          border: 1px solid var(--gray-200);
+        }
+
+        .question-counter {
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--gray-700);
+        }
+
+        .timer {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1rem;
+          font-weight: 600;
+          padding: 8px 16px;
+          border-radius: 8px;
+          min-width: 100px;
+          justify-content: center;
+          background: var(--success);
+          color: white;
+        }
+
+        .timer.warning {
+          background: var(--danger);
+          animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+
+        .question-text {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: var(--gray-900);
+          margin-bottom: 20px;
+          line-height: 1.5;
+          text-align: center;
+        }
+
+        .options-container {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .option {
+          display: flex;
+          align-items: center;
+          padding: 12px 16px;
+          border: 2px solid var(--gray-200);
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          background: var(--bg-card);
+        }
+
+        .option:hover {
+          border-color: var(--primary);
+          background: var(--gray-50);
+          transform: translateX(4px);
+        }
+
+        .option.selected {
+          border-color: var(--primary);
+          background: var(--primary);
+          color: white;
+          transform: translateX(6px);
+        }
+
+        .option-label {
+          font-size: 1rem;
+          cursor: pointer;
+          flex: 1;
+          line-height: 1.4;
+          margin-left: 12px;
+        }
+
+        /* Results */
+        .score-display {
+          font-size: 3rem;
+          font-weight: 700;
+          margin: 20px 0;
+          text-align: center;
+        }
+
+        .score-display.excellent {
+          color: var(--success);
+        }
+
+        .score-details {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 16px;
+          margin: 24px 0;
+        }
+
+        .score-stat {
+          text-align: center;
+          padding: 16px 12px;
+          background: var(--bg-card);
+          border-radius: 8px;
+          box-shadow: var(--shadow-sm);
+          border: 1px solid var(--gray-200);
+        }
+
+        .score-stat-value {
+          font-size: 1.8rem;
+          font-weight: 700;
+          display: block;
+          margin-bottom: 4px;
+          color: var(--success);
+        }
+
+        .score-stat-label {
+          font-size: 0.8rem;
+          color: var(--gray-500);
+          font-weight: 500;
+        }
+
+        /* Animations */
+        .fade-in {
+          animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .container { padding: 0 12px; }
+          .quiz-header { 
+            flex-direction: column; 
+            gap: 12px; 
+            text-align: center; 
+            padding: 16px; 
+          }
+          .question-text { font-size: 1.1rem; }
+          .option { padding: 10px 12px; }
+          .score-display { font-size: 2.5rem; }
+          .score-details { 
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+            gap: 12px; 
+          }
+        }
+
+        /* Demo styles */
+        .demo-section {
+          margin: 40px 0;
+        }
+
+        .demo-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 20px;
+          color: var(--gray-900);
+          text-align: center;
+        }
+
+        .button-group {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Quiz App - Compact UI</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Start Page Demo -->
+        <div class="demo-section">
+            <div class="demo-title">Start Page</div>
+            <div class="card fade-in">
+                <h2 style="font-size: 2rem; margin-bottom: 16px; text-align: center;">Welcome to the Programming Quiz Challenge! 💻</h2>
+                <p style="text-align: center; margin-bottom: 24px; color: var(--gray-700);">
+                    Test your programming knowledge with our comprehensive quiz covering various 
+                    programming concepts, languages, and technologies.
+                </p>
+                
+                <div class="card" style="text-align: left; background: var(--gray-50);">
+                    <h3 style="margin-bottom: 16px; font-size: 1.1rem;">Quiz Information:</h3>
+                    <ul style="list-style: none; color: var(--gray-700);">
+                        <li style="margin: 8px 0; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 600;">✓</span>
+                            20 multiple choice programming questions
+                        </li>
+                        <li style="margin: 8px 0; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 600;">✓</span>
+                            15 minutes total time limit
+                        </li>
+                        <li style="margin: 8px 0; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 600;">✓</span>
+                            Topics: JavaScript, Python, Web Development
+                        </li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center; margin-top: 24px;">
+                    <button class="btn btn-primary" style="padding: 12px 24px; font-size: 16px;">
+                        🚀 Start Programming Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Page Demo -->
+        <div class="demo-section">
+            <div class="demo-title">Quiz Page</div>
+            <div class="quiz-header">
+                <div class="question-counter">Question 1 of 20</div>
+                <div class="timer">
+                    <span>⏱️</span>
+                    <span>14:35</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="question-text">
+                    What is the correct way to declare a variable in JavaScript?
+                </div>
+                
+                <div class="options-container">
+                    <div class="option">
+                        <input type="radio" name="demo">
+                        <label class="option-label"><strong>A.</strong> var myVariable = "Hello";</label>
+                    </div>
+                    <div class="option selected">
+                        <input type="radio" name="demo" checked>
+                        <label class="option-label"><strong>B.</strong> let myVariable = "Hello";</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="demo">
+                        <label class="option-label"><strong>C.</strong> const myVariable = "Hello";</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="demo">
+                        <label class="option-label"><strong>D.</strong> All of the above</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-header">
+                <div class="button-group">
+                    <button class="btn btn-secondary">← Previous</button>
+                    <button class="btn btn-primary">Next →</button>
+                </div>
+                <button class="btn" style="background: var(--warning); color: white;">Submit Quiz</button>
+            </div>
+        </div>
+
+        <!-- Results Demo -->
+        <div class="demo-section">
+            <div class="demo-title">Results Page</div>
+            <div class="card">
+                <div class="score-display excellent">85%</div>
+                <div style="text-align: center; font-size: 1.1rem; margin: 16px 0; color: var(--gray-700);">
+                    🎉 Excellent work! Outstanding performance!
+                </div>
+                
+                <div class="score-details">
+                    <div class="score-stat">
+                        <span class="score-stat-value">17</span>
+                        <div class="score-stat-label">Correct</div>
+                    </div>
+                    <div class="score-stat">
+                        <span class="score-stat-value" style="color: var(--danger);">3</span>
+                        <div class="score-stat-label">Incorrect</div>
+                    </div>
+                    <div class="score-stat">
+                        <span class="score-stat-value" style="color: var(--gray-700);">20</span>
+                        <div class="score-stat-label">Total Questions</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="font-weight: 600; margin-bottom: 12px;">
+                    <strong>Question 1:</strong> What is the correct way to declare a variable in JavaScript?
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-bottom: 12px;">
+                    <div style="padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid var(--danger);">
+                        <strong>A.</strong> var myVariable = "Hello"; (Your answer)
+                    </div>
+                    <div style="padding: 8px 12px; border-radius: 6px; font-size: 0.9rem; background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); font-weight: 600;">
+                        <strong>D.</strong> All of the above ✓
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: rgba(239, 68, 68, 0.1); color: var(--danger); font-weight: 600; font-size: 0.9rem;">
+                    <span style="font-size: 1.1rem;">❌</span>
+                    <span>Incorrect. You selected A, but the correct answer is D.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI Components Demo -->
+        <div class="demo-section">
+            <div class="demo-title">UI Components</div>
+            
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Buttons</h3>
+                <div class="button-group">
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                    <button class="btn" style="background: var(--success); color: white;">Success</button>
+                    <button class="btn" style="background: var(--warning); color: white;">Warning</button>
+                    <button class="btn" style="background: var(--danger); color: white;">Danger</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 16px;">Timer States</h3>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <div class="timer">
+                        <span>⏱️</span>
+                        <span>14:35</span>
+                    </div>
+                    <div class="timer warning">
+                        <span>⏱️</span>
+                        <span>02:15</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <p style="color: var(--gray-700); font-size: 0.9rem;">
+                ✨ Modern, compact, and responsive design for the Quiz App
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive demos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Demo option selection
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options in the same container
+                    const container = this.closest('.options-container');
+                    container.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+
+            // Add fade-in animation to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

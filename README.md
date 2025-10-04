@@ -1,19 +1,29 @@
-# Online Quiz Application
+# Online Quiz Application - Programming Edition
 
-A full-stack quiz application built with React (frontend) and Node.js/Express (backend) with SQLite database.
+A full-stack programming quiz application built with React (frontend) and Node.js/Express (backend) with SQLite database.
 
 ## Features
 
 ### Core Features
-- ✅ Start page to begin the quiz
+- ✅ Start page to begin the programming quiz
+- ✅ 20 programming-related questions covering various topics
 - ✅ Question navigation with Next/Previous buttons
 - ✅ Submit quiz and get score
 - ✅ Results page showing final score
 
 ### Bonus Features
-- ✅ Timer functionality
+- ✅ Timer functionality (15 minutes)
 - ✅ Detailed results showing correct/incorrect answers
 - ✅ Backend tests for scoring logic
+
+## Programming Topics Covered
+
+- **JavaScript**: Data types, functions, async operations
+- **Web Development**: HTML, CSS, HTTP, DOM, JSON
+- **Python**: Frameworks (Django), exception handling
+- **Databases**: SQL, NoSQL (MongoDB)
+- **General Programming**: Time complexity, paradigms, Git
+- **APIs**: REST concepts and status codes
 
 ## Tech Stack
 
@@ -31,7 +41,35 @@ A full-stack quiz application built with React (frontend) and Node.js/Express (b
 
 ## Quick Start
 
-1. **Install dependencies:**
+### Option 1: Backend + HTML Demo (Currently Working)
+
+1. **Install backend dependencies:**
+   ```bash
+   cd server
+   npm install
+   ```
+
+2. **Start backend server:**
+   ```bash
+   cd server
+   node src/index.js
+   ```
+
+3. **Open the demo:**
+   - Open `demo.html` in your web browser
+   - The demo connects to the backend API at http://localhost:5000
+
+4. **Run tests:**
+   ```bash
+   cd server
+   npm test
+   ```
+
+### Option 2: Full React Setup (Dependency Issues)
+
+The React frontend currently has dependency compatibility issues with the latest Node.js version. To try the React version:
+
+1. **Install all dependencies:**
    ```bash
    npm run install-deps
    ```
@@ -41,14 +79,9 @@ A full-stack quiz application built with React (frontend) and Node.js/Express (b
    npm run dev
    ```
 
-   This will start:
+   This should start:
    - Backend server on http://localhost:5000
-   - Frontend server on http://localhost:3000
-
-3. **Run tests:**
-   ```bash
-   npm test
-   ```
+   - Frontend server on http://localhost:3000 (if dependencies resolve)
 
 ## Project Structure
 
