@@ -1,0 +1,25 @@
+# Netlify configuration for React app
+[build]
+  base = "client"
+  publish = "client/build"
+  command = "npm run build"
+
+# Functions directory
+[functions]
+  directory = "netlify/functions"
+
+# Redirect API calls to Netlify functions
+[[redirects]]
+  from = "/api/quiz/*"
+  to = "/.netlify/functions/quiz/:splat"
+  status = 200
+
+# Redirect all routes to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables (set these in Netlify dashboard)
+[build.environment]
+  REACT_APP_API_URL = ""
