@@ -81,7 +81,7 @@ The React frontend currently has dependency compatibility issues with the latest
 
    This should start:
    - Backend server on http://localhost:5000
-   - Frontend server on http://localhost:3000 (if dependencies resolve)
+   - Frontend server on http://localhost:3000
 
 ## Project Structure
 
