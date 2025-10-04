@@ -8,6 +8,10 @@
         "distDir": "build",
         "buildCommand": "cd client && npm install && npm run build"
       }
+    },
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -28,11 +32,6 @@
       "dest": "/client/build/index.html"
     }
   ],
-  "functions": {
-    "api/quiz.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "env": {
     "REACT_APP_API_URL": ""
   }
